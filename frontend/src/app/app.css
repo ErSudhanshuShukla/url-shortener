@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+/* ================================
+   DARK THEME — DEFAULT
+   ================================ */
+
+:root {
+  --color-bg: #202124;
+  --color-surface: #292a2d;
+  --color-surface-secondary: #303134;
+  --color-surface-input: #202124;
+  --color-surface-hover: #3c4043;
+  --color-surface-hover-secondary: #45474a;
+
+  --color-border: #3c4043;
+  --color-border-secondary: #4a4c50;
+  --color-border-danger: #5a3b45;
+
+  --color-primary: #8ab4f8;
+  --color-primary-hover: #aecbfa;
+  --color-primary-light: #a8c7fa;
+
+  --color-text-primary: #f8f9fa;
+  --color-text-heading: #f1f3f4;
+  --color-text-secondary: #bdc1c6;
+  --color-text-muted: #9aa0a6;
+  --color-text-subtle: #80868b;
+  --color-text-placeholder: #6f7378;
+  --color-white: #ffffff;
+
+  --color-success: #81c995;
+  --color-purple: #c58af9;
+
+  --color-danger: #f28b9b;
+  --color-danger-bg: #38272e;
+  --color-danger-hover: #463038;
+
+  --color-shadow: #000000;
+}
+
+
+/* ================================
+   LIGHT THEME
+   ================================ */
+
+:root.light {
+  --color-bg: #f1f0f7;
+  --color-surface: #faf9fd;
+  --color-surface-secondary: #e8e6f0;
+  --color-surface-input: #e5e3ec;
+  --color-surface-hover: #dcd9e5;
+  --color-surface-hover-secondary: #d3d0de;
+
+  --color-border: #d5d2df;
+  --color-border-secondary: #c4c0d0;
+  --color-border-danger: #e7c6cc;
+
+  --color-primary: #7357d9;
+  --color-primary-hover: #654acb;
+  --color-primary-light: #684fc7;
+
+  --color-text-primary: #252331;
+  --color-text-heading: #211e2c;
+  --color-text-secondary: #514d5d;
+  --color-text-muted: #716c7d;
+  --color-text-subtle: #898495;
+  --color-text-placeholder: #9a95a5;
+  --color-white: #ffffff;
+
+  --color-success: #35a866;
+  --color-purple: #8b5cf6;
+
+  --color-danger: #d34b5d;
+  --color-danger-bg: #f8e8eb;
+  --color-danger-hover: #f2dadd;
+
+  --color-shadow: #302b3d;
+}
+
+/* ================================
+   BASE
+   ================================ */
+
+html {
+  background: var(--color-bg);
+  transition: background-color 200ms ease;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  transition:
+    background-color 200ms ease,
+    color 200ms ease;
+}
+
+/* Hide scrollbar everywhere */
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}

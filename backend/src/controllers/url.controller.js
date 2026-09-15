@@ -15,6 +15,7 @@ const urlController = {
           message: "URL was already shortened.",
           data: {
             shortUrl: `${config.BASE_URL}/${existingUrl.shortCode}`,
+            expiresAt: existingUrl.expiresAt,
           },
         });
       }
@@ -113,8 +114,8 @@ const urlController = {
 
   delete: async (req, res) => {
     try {
-      const { shortCode } = req.params;
-      const url = await urlModel.findOneAndDelete({ shortCode });
+      const { id } = req.params;
+      const url = await urlModel.findOneAndDelete({ _id: id });
       if (!url) {
         return res.status(404).json({
           success: false,
