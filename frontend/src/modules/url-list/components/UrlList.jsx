@@ -71,7 +71,7 @@ const UrlList = () => {
 
         {!isLoading && !isError && data?.length > 0 && (
           <>
-            <div className="hidden border-b border-(--color-border) px-6 py-4 xl:grid xl:grid-cols-[180px_minmax(0,1fr)_90px_140px_132px] xl:items-center xl:gap-5">
+            <div className="hidden border-b border-(--color-border) px-6 py-4 xl:grid xl:grid-cols-[180px_minmax(0,1fr)_90px_140px_172px] xl:items-center xl:gap-5">
               <span className="text-[11px] font-semibold uppercase tracking-wider text-(--color-text-subtle)">
                 Short URL
               </span>

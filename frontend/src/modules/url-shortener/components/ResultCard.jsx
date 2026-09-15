@@ -1,9 +1,19 @@
-import { Check, Copy, ExternalLink, Link2, Clock3, X } from "lucide-react";
+import {
+  Check,
+  Copy,
+  ExternalLink,
+  Link2,
+  Clock3,
+  X,
+  QrCode,
+} from "lucide-react";
+import { useState } from "react";
 import useCopy from "@/hooks/useCopy";
 import useExpiry from "@/hooks/useExpiry";
+import QRCode from "@/components/QRCode";
 
 const ResultCard = ({ data, onClose }) => {
-  
+  const [showQR, setShowQR] = useState(false);
   const { copyLink, copied } = useCopy();
   const expiresIn = useExpiry(data.expiresAt);
 
@@ -22,7 +32,6 @@ const ResultCard = ({ data, onClose }) => {
               <p className="text-sm font-semibold text-(--color-text-heading)">
                 Link created
               </p>
-
               <p className="text-[11px] text-(--color-text-muted)">
                 Your short URL is ready
               </p>
@@ -32,8 +41,10 @@ const ResultCard = ({ data, onClose }) => {
           {/* Short URL */}
           <div className="min-w-0 flex-1 rounded-xl bg-(--color-surface-input) px-4 py-3">
             <div className="flex min-w-0 items-center gap-2">
-              <Link2 size={16} className="shrink-0 text-(--color-primary)" />
-
+              <Link2
+                size={16}
+                className="shrink-0 text-(--color-primary)"
+              />
               <span className="truncate text-sm font-medium text-(--color-primary-light)">
                 {data?.shortUrl}
               </span>
@@ -57,6 +68,17 @@ const ResultCard = ({ data, onClose }) => {
                 Copy
               </>
             )}
+          </button>
+
+          {/* QR */}
+          <button
+            type="button"
+            onClick={() => setShowQR((prev) => !prev)}
+            title="QR Code"
+            className="flex h-11 shrink-0 items-center justify-center gap-2 rounded-xl border border-(--color-border-secondary) bg-(--color-surface-secondary) px-5 text-sm font-medium text-(--color-text-secondary) transition hover:bg-(--color-surface-hover) hover:text-(--color-text-primary)"
+          >
+            <QrCode size={16} />
+            QR
           </button>
 
           {/* Open */}
@@ -100,7 +122,6 @@ const ResultCard = ({ data, onClose }) => {
                 <p className="font-semibold text-(--color-text-heading)">
                   Link created
                 </p>
-
                 <p className="text-xs text-(--color-text-muted)">
                   Your short URL is ready
                 </p>
@@ -124,8 +145,10 @@ const ResultCard = ({ data, onClose }) => {
             </p>
 
             <div className="flex min-w-0 items-center gap-2">
-              <Link2 size={16} className="shrink-0 text-(--color-primary)" />
-
+              <Link2
+                size={16}
+                className="shrink-0 text-(--color-primary)"
+              />
               <span className="min-w-0 flex-1 truncate text-sm font-medium text-(--color-primary-light) sm:text-base">
                 {data?.shortUrl}
               </span>
@@ -133,7 +156,7 @@ const ResultCard = ({ data, onClose }) => {
           </div>
 
           {/* Actions */}
-          <div className="mt-3 grid grid-cols-3 gap-2">
+          <div className="mt-3 grid grid-cols-4 gap-2">
             {/* Copy */}
             <button
               type="button"
@@ -153,6 +176,16 @@ const ResultCard = ({ data, onClose }) => {
               )}
             </button>
 
+            {/* QR */}
+            <button
+              type="button"
+              onClick={() => setShowQR((prev) => !prev)}
+              className="flex h-11 min-w-0 items-center justify-center gap-1.5 rounded-xl border border-(--color-border-secondary) bg-(--color-surface-secondary) px-2 text-xs font-medium text-(--color-text-secondary) transition hover:bg-(--color-surface-hover) hover:text-(--color-text-primary) sm:gap-2 sm:px-3 sm:text-sm"
+            >
+              <QrCode size={15} />
+              <span>QR</span>
+            </button>
+
             {/* Open */}
             <a
               href={data?.shortUrl}
@@ -166,11 +199,21 @@ const ResultCard = ({ data, onClose }) => {
 
             {/* Expiry */}
             <div className="flex h-11 min-w-0 items-center justify-center gap-1.5 rounded-xl border border-(--color-border) bg-(--color-surface-secondary) px-2 text-[11px] text-(--color-text-muted) sm:gap-2 sm:px-3 sm:text-xs">
-              <Clock3 size={14} className="shrink-0 text-(--color-purple)" />
+              <Clock3
+                size={14}
+                className="shrink-0 text-(--color-purple)"
+              />
               <span className="truncate">{expiresIn}h</span>
             </div>
           </div>
         </div>
+
+        {/* QR Code */}
+        {showQR && (
+          <div className="mt-4 flex justify-center border-t border-(--color-border) pt-4">
+            <QRCode value={data?.shortUrl} />
+          </div>
+        )}
       </div>
     </section>
   );
