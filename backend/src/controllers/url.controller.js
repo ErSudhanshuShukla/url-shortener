@@ -75,6 +75,18 @@ const urlController = {
       const totalUrls = await urlModel.countDocuments();
       const totalPages = Math.ceil(totalUrls / limit);
 
+      if (totalUrls === 0) {
+        return res.status(200).json({
+          success: true,
+          data: [],
+          pagination: {
+            page: 1,
+            totalPages: 0,
+            totalUrls: 0,
+          },
+        });
+      }
+
       if (page > totalPages) {
         return res.status(400).json({
           success: false,
