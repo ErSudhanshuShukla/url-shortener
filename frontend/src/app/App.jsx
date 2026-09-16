@@ -9,13 +9,18 @@ function App() {
   return (
     <div className="min-h-screen bg-(--color-bg) text-(--color-text-primary) transition-colors duration-200">
       <Navbar />
-      <main id="home" className="mx-auto max-w-6xl px-5 pb-12 sm:px-6">
+
+      <main
+        id="home"
+        className="mx-auto max-w-6xl px-5 pt-16 pb-12 sm:px-6"
+      >
         <Hero />
         <ShortenForm />
         <UrlList />
-        <Footer />
       </main>
+
       <ScrollToTop />
+      <Footer />
     </div>
   );
 }

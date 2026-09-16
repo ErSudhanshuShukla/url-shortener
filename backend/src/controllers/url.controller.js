@@ -69,23 +69,47 @@ const urlController = {
 
   getAll: async (req, res) => {
     try {
-      const data = await urlModel.find({});
+      const page = req.page;
+      const limit = 5;
+
+      const totalUrls = await urlModel.countDocuments();
+      const totalPages = Math.ceil(totalUrls / limit);
+
+      if (page > totalPages) {
+        return res.status(400).json({
+          success: false,
+          message: "Page does not exist",
+        });
+      }
+
+      const skip = (page - 1) * limit;
+
+      const data = await urlModel
+        .find({})
+        .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(limit);
+
       return res.status(200).json({
         success: true,
-        data: data.map((url) => {
-          return {
-            _id: url._id,
-            originalUrl: url.originalUrl,
-            shortCode: url.shortCode,
-            shortUrl: `${config.BASE_URL}/${url.shortCode}`,
-            clicks: url.clicks,
-            createdAt: url.createdAt,
-            expiresAt: url.expiresAt,
-          };
-        }),
+        data: data.map((url) => ({
+          _id: url._id,
+          originalUrl: url.originalUrl,
+          shortCode: url.shortCode,
+          shortUrl: `${config.BASE_URL}/${url.shortCode}`,
+          clicks: url.clicks,
+          createdAt: url.createdAt,
+          expiresAt: url.expiresAt,
+        })),
+        pagination: {
+          page,
+          totalPages,
+          totalUrls,
+        },
       });
     } catch (error) {
       return res.status(500).json({
+        success: false,
         message: "Internal server error",
       });
     }

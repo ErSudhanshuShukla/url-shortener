@@ -5,9 +5,9 @@ const api = axios.create({
 });
 
 const urlsApi = {
-  getAll: async () => {
-    const res = await api.get("/api/url");
-    return res.data.data;
+  getAll: async (page = 1) => {
+    const res = await api.get(`/api/url?page=${page}`);
+    return res.data;
   },
 
   delete: async (id) => {
